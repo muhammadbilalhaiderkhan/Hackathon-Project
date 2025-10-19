@@ -1,7 +1,10 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 
 export default function HeroSection() {
+  const navigate = useNavigate(); // ✅ Initialize navigate
+
   return (
     <section className="relative bg-[#0a0a0a] text-gray-100 min-h-[90vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
       
@@ -20,14 +23,19 @@ export default function HeroSection() {
 
       {/* Buttons */}
       <div className="flex gap-4 z-10 relative">
-        <button className="bg-indigo-600 hover:bg-indigo-700 text-white text-lg px-6 py-3 rounded-xl flex items-center gap-2 transition duration-300">
+        <button
+          onClick={() => navigate("/create")} // ✅ Navigate to CreatePitch page
+          className="bg-indigo-600 hover:bg-indigo-700 text-white text-lg px-6 py-3 rounded-xl flex items-center gap-2 transition duration-300"
+        >
           Create Pitch <ArrowRight size={20} />
         </button>
-        <button className="border border-gray-600 text-gray-300 hover:bg-gray-800 px-6 py-3 rounded-xl text-lg transition duration-300">
+        <button
+          onClick={() => navigate("/dashboard")} // ✅ Navigate to Dashboard page
+          className="border border-gray-600 text-gray-300 hover:bg-gray-800 px-6 py-3 rounded-xl text-lg transition duration-300"
+        >
           View Dashboard
         </button>
       </div>
-
 
       {/* Floating small AI particles */}
       <div className="absolute top-20 left-10 w-2 h-2 bg-indigo-400 rounded-full animate-bounce-slow opacity-60"></div>
