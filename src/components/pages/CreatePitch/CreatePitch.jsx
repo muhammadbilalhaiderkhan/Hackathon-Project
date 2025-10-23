@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import Loader from "../../loader/Loader";
 import { db } from "../../../config/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { GoogleGenAI } from "@google/genai";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function CreatePitch() {
+  const { user } = useAuth();  // Get the logged-in user
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,6 +20,11 @@ export default function CreatePitch() {
 
     if (!title || !content) {
       toast.error("Please fill all fields");
+      return;
+    }
+
+    if (!user) {
+      toast.error("You must be logged in to generate a pitch");
       return;
     }
 
@@ -44,17 +51,21 @@ export default function CreatePitch() {
         name: title,
         targetAudience: content,
         landingPage: generatedPitch,
+        userId: user.uid, // Link the pitch with the logged-in user's ID
       };
 
-      // 🔹 Save to Firestore
-      await addDoc(collection(db, "pitches"), {
+      // ✅ Firestore: Store the pitch with userId in the document
+      const newPitchRef = doc(collection(db, "pitches"));
+      await setDoc(newPitchRef, {
+        id: newPitchRef.id,
         title,
         content,
         generatedPitch: pitchData,
+        userId: user.uid, // Store userId to ensure the pitch belongs to the correct user
         createdAt: serverTimestamp(),
       });
 
-      // 🔹 Update UI immediately
+      // 🔹 Update UI immediately with generated pitch
       setGeneratedPitchData(pitchData);
 
       toast.success("Pitch generated and saved successfully!");
