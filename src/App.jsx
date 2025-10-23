@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { auth } from '../src/config/firebase.js'
 
 // Layout and Auth
-import Layout from "./components/layout/layout.jsx";
+import Layout from "./components/layout/Layout.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 
