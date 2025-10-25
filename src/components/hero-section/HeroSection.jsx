@@ -6,10 +6,10 @@ export default function HeroSection() {
   const navigate = useNavigate(); // ✅ Initialize navigate
 
   return (
-    <section className="relative bg-[#0a0a0a] text-gray-100 min-h-[90vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+    <section className="p-5 relative bg-[#0a0a0a] text-gray-100 min-h-[90vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
       
       {/* Animated Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/20 via-[#0a0a0a] to-indigo-900/10 animate-gradient"></div>
+      <div className=" absolute inset-0 bg-gradient-to-br from-indigo-950/20 via-[#0a0a0a] to-indigo-900/10 animate-gradient"></div>
 
       {/* Large Floating Orbs with Glow */}
       <div className="absolute -top-40 -left-40 w-80 h-80 bg-indigo-600/30 rounded-full blur-3xl animate-pulse-glow"></div>
