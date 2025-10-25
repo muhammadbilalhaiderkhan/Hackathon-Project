@@ -53,9 +53,9 @@ export default function Navbar() {
             className="text-indigo-400 group-hover:rotate-12 transition-transform"
           />
           <span className="bg-gradient-to-r from-indigo-400 to-indigo-600 bg-clip-text text-transparent">
-            Pitch
-          </span>
+          Pitch
           <span className="text-gray-100">craft</span>
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
